@@ -10,7 +10,7 @@ app.use(cors());
 //automactically pase json
 app.use(express.json());
 
-const uri = 'mongodb://celinee:!Wnn20041114@ac-bdflsvx-shard-00-00.1fa0xcc.mongodb.net:27017,ac-bdflsvx-shard-00-01.1fa0xcc.mongodb.net:27017,ac-bdflsvx-shard-00-02.1fa0xcc.mongodb.net:27017/?replicaSet=atlas-35fabf-shard-0&ssl=true&authSource=admin&retryWrites=true&w=majority&appName=taskTrek';
+const uri = 'mongodb://celinee:!Wnn20041114@ac-bdflsvx-shard-00-00.1fa0xcc.mongodb.net:27017,ac-bdflsvx-shard-00-01.1fa0xcc.mongodb.net:27017,ac-bdflsvx-shard-00-02.1fa0xcc.mongodb.net:27017/?replicaSet=atlas-35fabf-shard-0&ssl=true&authSource=admin';
 
 mongoose.connect(uri)
   .then(() => console.log('✅ MongoDB connected'))
@@ -24,10 +24,30 @@ app.post('/add', (req, res) => {
     .catch(err => res.json(err));
 })
 
-app.get('/get', (req, res) => {
-  TodoModel.find()
+app.get('/get', async (req, res) => {
+  try {
+    const todos = await TodoModel.find();
+    console.log("📦 Sending todos:", todos);
+    res.json(todos);
+  } catch (error) {
+    console.error("❌ Error fetching todos:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+app.put('/update/:id', (req, res) => {
+  const { id } = req.params;
+  TodoModel.findByIdAndUpdate({ _id: id }, { done: true })
     .then(result => res.json(result))
-    .catch(err => res.json(err))
+    .catch(error => res.json(error))
+})
+
+app.delete('/delete/:id', (req, res) => {
+  const { id } = req.params;
+  TodoModel.findByIdAndDelete({ _id: id })
+    .then(result => res.json(result))
+    .catch(err => res.json(err));
 })
 
 //listen to port 3001

@@ -82,14 +82,6 @@ npm run dev
 
 ---
 
-## 📸 Screenshots
-
-| Todo List View |
-|----------------|
-| ![screenshot](https://via.placeholder.com/600x300?text=TaskTrek+UI) |
-
----
-
 ## ✨ Credits
 
 Created by [@celineWang14](https://github.com/celineWang14)  
@@ -104,4 +96,3 @@ This project is licensed under the MIT License.
 
 ---
 
-Let me know if you want help customizing the screenshot/GIF part or adding your live demo link!

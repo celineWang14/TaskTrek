@@ -1,4 +1,3 @@
-```markdown
 # 📝 TaskTrek
 
 **TaskTrek** is a full-stack Todo List web application built with the **MERN stack** (MongoDB, Express, React, Node.js). It allows users to create, complete, and delete tasks in a clean, modern interface.
